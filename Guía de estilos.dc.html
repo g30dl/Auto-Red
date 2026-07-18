@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&amp;family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family:'Manrope',sans-serif; -webkit-font-smoothing:antialiased; }
+  a { color:#BE3710; text-decoration:none; }
+  a:hover { color:#8f2909; }
+</style>
+</helmet>
+<div style="background:#FAB177;min-height:100vh;padding:48px 32px;font-family:'Manrope',sans-serif">
+  <div style="max-width:1080px;margin:0 auto;background:#FFFBF6;border-radius:28px;overflow:hidden;box-shadow:0 40px 90px -40px rgba(60,30,10,.5);border:1px solid #F2DAC2">
+
+    <!-- header -->
+    <div style="background:#33200f;color:#FFFBF6;padding:44px 48px;display:flex;align-items:center;gap:20px">
+      <div style="width:60px;height:60px;flex:0 0 60px;border-radius:18px;background:#BE3710;display:grid;place-items:center;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:30px;color:#fff">R</div>
+      <div style="flex:1">
+        <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;letter-spacing:-.8px;line-height:1"><span style="color:#FFFBF6">AUTO</span> <span style="color:#E88A5A">RED</span></div>
+        <div style="color:#d9b9a3;font-size:14.5px;font-weight:500;margin-top:8px">Guía de estilos · Sistema de diseño de la app móvil</div>
+      </div>
+      <div style="text-align:right;color:#b58c72;font-size:12px;font-weight:600;line-height:1.6">Vista conductor + mecánico<br>Guayaquil · Ecuador</div>
+    </div>
+
+    <div style="padding:44px 48px">
+
+      <!-- COLOR -->
+      <div style="display:flex;align-items:center;gap:11px;margin-bottom:8px"><span style="width:5px;height:22px;background:#BE3710;border-radius:3px"></span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;color:#33200f;letter-spacing:-.4px">01 · Color</span></div>
+      <p style="color:#8a7060;font-size:14px;line-height:1.5;margin:0 0 22px 16px;max-width:640px">Cada rol de color es una variable CSS (<code style="background:#FFF6ED;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#BE3710">--red</code>, <code style="background:#FFF6ED;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#BE3710">--ink</code>…) y se re-tematiza con la paleta activa. Máximo 1–2 colores de fondo por pantalla.</p>
+
+      <!-- roles (Híbrida) -->
+      <div style="font-size:12px;font-weight:800;color:#8a7060;letter-spacing:.5px;text-transform:uppercase;margin:0 0 12px 16px">Roles — paleta activa "Híbrida"</div>
+      <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:14px">
+        <sc-for list="{{ roles }}" as="r" hint-placeholder-count="10">
+          <div style="border:1px solid #F2DAC2;border-radius:14px;overflow:hidden;background:#fff">
+            <div style="height:64px;background:{{ r.hex }};border-bottom:1px solid #F2DAC2"></div>
+            <div style="padding:9px 11px">
+              <div style="font-weight:700;font-size:12.5px;color:#33200f">{{ r.name }}</div>
+              <div style="color:#a08976;font-size:11px;font-variant-numeric:tabular-nums;margin-top:1px">{{ r.hex }}</div>
+              <div style="color:#8a7060;font-size:10.5px;margin-top:3px;line-height:1.25">{{ r.use }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- palettes -->
+      <div style="font-size:12px;font-weight:800;color:#8a7060;letter-spacing:.5px;text-transform:uppercase;margin:26px 0 12px 16px">Paletas del tema (tweak "Estilo")</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <sc-for list="{{ palettes }}" as="p" hint-placeholder-count="5">
+          <div style="display:flex;align-items:center;gap:16px;background:#fff;border:1px solid #F2DAC2;border-radius:14px;padding:13px 18px">
+            <div style="width:118px;flex:0 0 118px">
+              <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:16px;color:#33200f">{{ p.name }}</div>
+              <div style="color:#8a7060;font-size:11.5px;margin-top:2px">{{ p.mood }}</div>
+            </div>
+            <div style="display:flex;gap:8px;flex:1;flex-wrap:wrap">
+              <sc-for list="{{ p.swatches }}" as="s" hint-placeholder-count="6">
+                <span title="{{ s }}" style="width:34px;height:34px;border-radius:9px;background:{{ s }};border:1px solid rgba(0,0,0,.08)"></span>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+
+      <!-- TYPE -->
+      <div style="display:flex;align-items:center;gap:11px;margin:44px 0 8px"><span style="width:5px;height:22px;background:#BE3710;border-radius:3px"></span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;color:#33200f;letter-spacing:-.4px">02 · Tipografía</span></div>
+      <p style="color:#8a7060;font-size:14px;line-height:1.5;margin:0 0 22px 16px;max-width:640px">Dos familias. <b style="color:#33200f">Bricolage Grotesque</b> para títulos, cifras y llamados a la acción. <b style="color:#33200f">Manrope</b> para texto, etiquetas y datos.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px 24px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px">Bricolage Grotesque — Display</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:34px;color:#33200f;letter-spacing:-.8px;line-height:1.05">Mecánicos verificados</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:22px;color:#33200f;margin-top:14px">Título de sección</div>
+          <div style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:15px;color:#BE3710;margin-top:12px">Botón / CTA</div>
+          <div style="color:#a08976;font-size:12px;margin-top:16px;font-variant-numeric:tabular-nums">Pesos 500 · 600 · 700 · 800</div>
+        </div>
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px 24px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px">Manrope — Texto</div>
+          <div style="font-size:15px;color:#33200f;line-height:1.5;font-weight:500">Comparte y aprende con otros conductores. Agenda servicios a domicilio o en taller con mecánicos verificados.</div>
+          <div style="font-size:12.5px;font-weight:700;color:#8a7060;text-transform:uppercase;letter-spacing:.4px;margin-top:16px">Etiqueta de campo</div>
+          <div style="font-size:13px;color:#8a7060;margin-top:8px">Texto secundario y metadatos</div>
+          <div style="color:#a08976;font-size:12px;margin-top:16px;font-variant-numeric:tabular-nums">Pesos 400 · 500 · 600 · 700</div>
+        </div>
+      </div>
+
+      <!-- COMPONENTS -->
+      <div style="display:flex;align-items:center;gap:11px;margin:44px 0 8px"><span style="width:5px;height:22px;background:#BE3710;border-radius:3px"></span><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:23px;color:#33200f;letter-spacing:-.4px">03 · Componentes</span></div>
+      <p style="color:#8a7060;font-size:14px;line-height:1.5;margin:0 0 22px 16px;max-width:640px">Radios de 11–22px, bordes de 1.5px en <code style="background:#FFF6ED;padding:1px 6px;border-radius:5px;font-size:12.5px;color:#BE3710">--line</code>, íconos de trazo 2px estilo lineal.</p>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px">
+
+        <!-- buttons -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Botones</div>
+          <div style="display:flex;flex-direction:column;gap:10px">
+            <button style="background:#BE3710;color:#fff;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;font-family:'Bricolage Grotesque',sans-serif;cursor:pointer">Acción principal</button>
+            <button style="background:#e2ebef;color:#33505f;border:none;border-radius:14px;padding:14px;font-size:15px;font-weight:700;cursor:pointer">Secundario</button>
+            <button style="background:#FCE3D5;color:#BE3710;border:1.5px solid #BE3710;border-radius:14px;padding:14px;font-size:15px;font-weight:700;cursor:pointer">Contorno / destructivo</button>
+          </div>
+        </div>
+
+        <!-- chips -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Chips y filtros</div>
+          <div style="display:flex;flex-wrap:wrap;gap:8px">
+            <span style="background:#33505f;color:#fff;border:1.5px solid #33505f;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700">Activo</span>
+            <span style="background:#fff;color:#8a7060;border:1.5px solid #F2DAC2;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700">Inactivo</span>
+            <span style="background:#BE3710;color:#fff;border:1.5px solid #BE3710;border-radius:999px;padding:9px 16px;font-size:13px;font-weight:700">Seleccionado</span>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:12px">
+            <span style="display:inline-flex;align-items:center;gap:5px;background:#e2ebef;color:#33505f;font-size:11px;font-weight:800;padding:5px 11px;border-radius:999px"><svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 1l2.4 2.1 3.1-.5 1 3 3 1-.5 3.1L23 12l-2 2.4.5 3.1-3 1-1 3-3.1-.5L12 23l-2.4-2.1-3.1.5-1-3-3-1 .5-3.1L1 12l2-2.4-.5-3.1 3-1 1-3 3.1.5z"></path></svg>Verificado</span>
+            <span style="background:#FCE3D5;color:#BE3710;font-size:11px;font-weight:800;padding:5px 11px;border-radius:999px">Pronto</span>
+          </div>
+        </div>
+
+        <!-- input + toggle -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Campos y toggle</div>
+          <label style="display:block;color:#8a7060;font-size:11.5px;font-weight:700;margin-bottom:7px;text-transform:uppercase;letter-spacing:.4px">Correo electrónico</label>
+          <div style="background:#FFF6ED;border:1.5px solid #F2DAC2;border-radius:13px;padding:14px 15px;font-size:14px;color:#33200f">andres@correo.com</div>
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-top:16px">
+            <span style="font-size:13.5px;font-weight:700;color:#33200f">Recordatorio activo</span>
+            <span style="width:48px;height:28px;border-radius:999px;background:#33505f;position:relative;display:inline-block"><span style="position:absolute;top:3px;left:23px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.2)"></span></span>
+          </div>
+        </div>
+
+        <!-- badge card -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Tarjeta de mecánico</div>
+          <div style="display:flex;gap:12px;align-items:center">
+            <div style="width:50px;height:50px;flex:0 0 50px;border-radius:14px;background:#33505f;display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:18px">CM</div>
+            <div style="flex:1">
+              <div style="display:flex;align-items:center;gap:6px"><span style="font-family:'Bricolage Grotesque',sans-serif;font-weight:700;font-size:15px;color:#33200f">Carlos Medina</span><svg width="14" height="14" viewBox="0 0 24 24" fill="#33505f"><path d="M12 1l2.4 2.1 3.1-.5 1 3 3 1-.5 3.1L23 12l-2 2.4.5 3.1-3 1-1 3-3.1-.5L12 23l-2.4-2.1-3.1.5-1-3-3-1 .5-3.1L1 12l2-2.4-.5-3.1 3-1 1-3 3.1.5z"></path></svg></div>
+              <div style="color:#8a7060;font-size:12px;margin-top:1px;font-weight:600">Motor y diagnóstico</div>
+              <div style="display:flex;align-items:center;gap:6px;margin-top:5px"><span style="color:#e6a935;font-size:12px;letter-spacing:1px">★★★★★</span><span style="font-size:12px;font-weight:700;color:#33200f">4.9</span><span style="font-size:11px;color:#8a7060">(214)</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- timeline -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Línea de tiempo del servicio</div>
+          <sc-for list="{{ steps }}" as="t" hint-placeholder-count="3">
+            <div style="display:flex;gap:12px">
+              <div style="display:flex;flex-direction:column;align-items:center">
+                <span style="width:22px;height:22px;border-radius:50%;background:{{ t.bg }};border:2px solid {{ t.brd }};display:grid;place-items:center;color:#fff;font-size:11px;flex:0 0 22px">{{ t.mark }}</span>
+                <span style="width:2px;flex:1;background:{{ t.line }};min-height:16px"></span>
+              </div>
+              <div style="padding-bottom:14px"><div style="font-size:13.5px;font-weight:700;color:{{ t.col }}">{{ t.label }}</div><div style="font-size:11.5px;color:#8a7060;margin-top:1px">{{ t.time }}</div></div>
+            </div>
+          </sc-for>
+        </div>
+
+        <!-- nav + toast -->
+        <div style="background:#fff;border:1px solid #F2DAC2;border-radius:16px;padding:22px">
+          <div style="color:#8a7060;font-size:11px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;margin-bottom:15px">Navegación y avisos</div>
+          <div style="border:1.5px solid #F2DAC2;border-radius:14px;display:flex;padding:8px 4px;background:#fff">
+            <sc-for list="{{ navItems }}" as="n" hint-placeholder-count="5">
+              <div style="flex:1;display:flex;flex-direction:column;align-items:center;gap:4px;color:{{ n.col }}">
+                <span style="width:19px;height:19px;border-radius:6px;background:currentColor;opacity:.9"></span>
+                <span style="font-size:10px;font-weight:700">{{ n.label }}</span>
+              </div>
+            </sc-for>
+          </div>
+          <div style="margin-top:14px;background:#33200f;color:#FFFBF6;border-radius:12px;padding:12px 16px;font-size:13px;font-weight:700;text-align:center">¡Cita agendada! La verás en Rastrear</div>
+        </div>
+
+      </div>
+
+      <!-- footer -->
+      <div style="margin-top:40px;padding-top:22px;border-top:1px solid #F2DAC2;display:flex;align-items:center;gap:10px;color:#a08976;font-size:12.5px">
+        <span style="width:26px;height:26px;border-radius:8px;background:#BE3710;display:grid;place-items:center;color:#fff;font-family:'Bricolage Grotesque',sans-serif;font-weight:800;font-size:14px">R</span>
+        Auto Red · Sistema de diseño — íconos lineales 2px, radios 11–22px, sombras suaves, espaciado múltiplo de ~4px.
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1160,&quot;height&quot;:1500}}">
+class Component extends DCLogic {
+  renderVals() {
+    return {
+      roles: [
+        { name:'bg',        hex:'#FFFBF6', use:'Fondo de pantalla' },
+        { name:'surf',      hex:'#FFFFFF', use:'Tarjetas / superficies' },
+        { name:'surf2',     hex:'#FFF6ED', use:'Campos, chips inactivos' },
+        { name:'ink',       hex:'#33200F', use:'Texto principal' },
+        { name:'sub',       hex:'#8A7060', use:'Texto secundario' },
+        { name:'red',       hex:'#BE3710', use:'Marca / acción / acento' },
+        { name:'redSoft',   hex:'#FCE3D5', use:'Fondo suave de acento' },
+        { name:'slate',     hex:'#33505F', use:'Color secundario' },
+        { name:'slateSoft', hex:'#E2EBEF', use:'Fondo suave slate' },
+        { name:'line',      hex:'#F2DAC2', use:'Bordes / divisores' },
+      ],
+      palettes: [
+        { name:'Híbrida', mood:'Por defecto · cálida', swatches:['#FFFBF6','#FFFFFF','#33200f','#BE3710','#FCE3D5','#33505f'] },
+        { name:'Clásico', mood:'Neutro · vino', swatches:['#ece7dd','#ffffff','#25323a','#7c1f26','#f4e4e3','#33505f'] },
+        { name:'Nocturno', mood:'Oscuro', swatches:['#141d22','#1e2a31','#eee7db','#d1585f','#3a2529','#7fa2b3'] },
+        { name:'Arena', mood:'Beige suave', swatches:['#efe8db','#fbf7ef','#2b2620','#8a2b26','#efe0d6','#3f5a68'] },
+        { name:'Trinidad', mood:'Naranja vivo', swatches:['#FFFBF6','#ffffff','#3a1e12','#E14A10','#FEEAD6','#33505f'] },
+      ],
+      steps: [
+        { mark:'✓', bg:'#33505f', brd:'#33505f', line:'#33505f', col:'#33200f', label:'Vehículo ingresado', time:'09:40 · Hecho' },
+        { mark:'●', bg:'#BE3710', brd:'#BE3710', line:'#F2DAC2', col:'#33200f', label:'En reparación', time:'11:20 · ahora' },
+        { mark:'',  bg:'#fff',    brd:'#F2DAC2', line:'#F2DAC2', col:'#8a7060', label:'Listo para entrega', time:'Pendiente' },
+      ],
+      navItems: [
+        { label:'Inicio', col:'#BE3710' },
+        { label:'Buscar', col:'#8a7060' },
+        { label:'Comunidad', col:'#8a7060' },
+        { label:'Rastrear', col:'#8a7060' },
+        { label:'Perfil', col:'#8a7060' },
+      ],
+    };
+  }
+}
+</script>
+</body>
+</html>
